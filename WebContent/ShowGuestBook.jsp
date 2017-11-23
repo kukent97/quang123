@@ -8,7 +8,7 @@
     
     <sql:setDataSource driver="com.mysql.jdbc.Driver" 
     url="jdbc:mysql://localhost/guestbook" 
-    user="root" password="nhuy" />
+    user="root" password="123" />
     <sql:query var="items" sql="select * from cmt"/>
     
 <!DOCTYPE html>
@@ -17,14 +17,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Guest Book Application</title>
 <style type="text/css">
-table{border:1px solid yellow;border-collapse:collapse;font-size:large;padding:16px}
-td, th{border:1px solid yellow; padding:10px;text-align:center}
+table{border:1px solid #000;border-collapse:collapse;font-size:large;padding:16px}
+td, th{border:1px solid #000; padding:10px;text-align:center}
+p{color:red;font-size:25px}
+button{font-size:20px;background-color: #fff;color:red}
 </style>
 </head>
 <body>
-<p>Welcome ${sessionScope.user.getFullName()}</p>
+<p><b>HELLO ${sessionScope.user.getFullName()}, Welcome</b></p>
 <table>
-<caption>Guest Book</caption>
+<caption style="color:green; font-size:35px"><b>Guest Book</b></caption>
 <tr>
 <c:forEach begin="1" items="${items.getColumnNames() }" var ="colHeader">
 <th>${colHeader}</th>
@@ -36,23 +38,24 @@ td, th{border:1px solid yellow; padding:10px;text-align:center}
 <td>${row.username}</td>
 <td>${row.comment}</td>
 <td>${row.datecmt}</td>
+
 <c:if test="${sessionScope.user.getUserName() eq row.username }">
-<td><a href="EditCmt.jsp?id=${row.id }">Sửa</a></td>
+<td><a href="EditCmt.jsp?id=${row.id }">Edit</a></td>
 <td><a href="Comment?action=delete&id=${row.id}" 
-onclick="return confirm('Bạn có chắc muốn xóa comment này?');">Xóa</a></td>
+onclick="return confirm('Do you want to delete this comment?');">Delete</a></td>
 </c:if>
 </tr>
 </c:forEach>
 </table>
-<p><strong>Tổng số cmt: ${items.getRowCount()}</strong></p>
-<a href="AddCmt.jsp">Add comment</a>
-<a href="logout.jsp">Logout</a>
+<p>Total comments: ${items.getRowCount()}</p>
+<button><a href="AddCmt.jsp">Add comment</a></button>
+<button style="margin-left:400px"><a href="logout.jsp">Log-out</a></button>
 <script type="text/javascript">
 <c:if test="${sessionScope.delete eq 'false'}">
-alert("Không xóa được comment, vui lòng thử lại!");
+alert("Failed, Please try again!");
 </c:if>
 <c:if test="${sessionScope.delete eq 'true'}">
-alert("Xóa comment thành công!");
+alert("Completed!");
 window.location = "ShowGuestBook.jsp";
 </c:if>
 <c:remove var="delete" scope="session"></c:remove>

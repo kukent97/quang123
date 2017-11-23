@@ -8,7 +8,7 @@ public class DataAccess {
 	private final static String Driver = "com.mysql.jdbc.Driver";
 	private final static String URL = "jdbc:mysql://localhost/guestbook";
 	private final static String USERID = "root";
-	private final static String PWD = "nhuy";
+	private final static String PWD = "123";
 	static Connection conn;
 	public static String err; 
 	

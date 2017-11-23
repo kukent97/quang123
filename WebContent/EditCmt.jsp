@@ -13,7 +13,7 @@
     </c:if>
     <sql:setDataSource driver="com.mysql.jdbc.Driver" 
     url="jdbc:mysql://localhost/guestbook" 
-    user="root" password="nhuy" />
+    user="root" password="123" />
     <sql:query var="items" sql="select * from cmt where id = ${param.id }"/>
 <!DOCTYPE html>
 <html>
